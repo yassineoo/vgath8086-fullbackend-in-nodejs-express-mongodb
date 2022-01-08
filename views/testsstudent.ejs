@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" lang="en">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/testsstudent.css" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,800;1,100;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+<body>
+
+	<div class="tests-table">
+		<table>
+			<thead>
+				<tr class="table-head row">
+
+					<th> First Name </th>
+					<th> Family Name</th>
+					<th> Group</th>
+					<th> Time Spent</th>
+					<th> the mark</th>
+					<th> Submission</th>
+				</tr>
+
+				
+				
+				<% for(var key=0; key< test.testStudents.length; key++) {
+		
+
+					
+					%>
+					<tr class="row switch-background">
+						<th> <p class="tobe-shifted-little text-center"><%=test.testStudents[key].firstName %></p> </th>
+						<th> <p class="tobe-shifted text-center"><%=test.testStudents[key].familyName %> </p></th>
+						<th> <p class="tobe-shifted text-center"><%=test.testStudents[key].group %> </p></th>
+						<th> <p class="tobe-shifted text-center"> <%=test.testStudents[key].time.toFixed(2) %> min </p></th>
+						<th> <p class="tobe-shifted text-center"> <%=test.testStudents[key].note %></p></th>
+						<th> <p class="tobe-shifted text-center"> <a href="./<%=test._id %>/<%=test.testStudents[key]._id %>" style="font-weight: 600;">Submission</a></p></th>
+
+					</tr>
+					<% } %>
+			</thead>
+		</table>
+	</div>	
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/alltests.js"></script>
+</body>	
+
+
+</html>

@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" lang="en">
+ 
+    <link rel="stylesheet" href="/css/codemirror.css">
+    <link rel="stylesheet" href="/css/monokai.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/css/submission.css" >
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,800;1,100;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+<body>
+    <p id='textArea'></p>
+
+        <input hidden value='<%=std%>' id="val"/>
+        <%var y="./"+element._id%>
+        <form id="form__signIn" method="POST" action="<%=y%>"> 
+            <label>correction</label>
+             <input type="hidden" name='stdid' value="<%=element._id%>">
+             <input type="text" placeholder="la Note" id="note" name="note"/>
+             <button id = "send" >submit</button>
+          </form>
+</body>
+<script src="/js/codemirror.js"></script>
+<script src="/js/simple.js"></script>
+    
+    <script>
+      
+        
+     CodeMirror.defineSimpleMode('asm86',{
+            start:[
+            {regex: /"(?:[^\\]|\\.)*?(?:"|$)/, token: "string"},
+            {regex: /'(?:[^\\]|\\.)*?(?:'|$)/, token: "string"},
+                
+                {regex: /REP[\t\s]+(MOVS|CMPS|SCAS|LODS|STOS)(b|w)\b/i, token: 'builtin'}, //instrcution
+
+                {regex: /[\s\t]*(add|adc|inc|sub|sbb|dec|neg|cmp|mul|imul|div|idiv|cbw|cwd|not|mov|push|pop|xchg|pushf|popf|SHL|SAL|SHR|SAR|ROL|ROR|RCL|RCR|AND|OR|TEST|XOR|REP|(MOVS|CMPS|SCAS|LODS|STOS)(b|w)|CALL|JMP|RET|JE|JZ|JL|JNGE|JLE|JNG|JB|JNAE|JBE|JNA|JP|JPE|JO|JS|JNE|JNZ|JNL|JGE|JNLE|JG|JNB|JAE|JNBE|JA|JNP|JPO|JNO|JNS|LOOP|LOOPZ|LOOPE|LOOPNZ|LOOPNE|INT|CLC|CMC|STC|CLD|STD)\b/i, token: 'builtin', sol: true},                      //instrcution
+
+                
+
+                {regex: /[a-z_][a-z0-9_°]*\s*\:/i, token: 'link', indent: true},    //label
+                {regex: /[\s\t]*(org|endp|endm|proc)\b/i, token: 'tag', sol: true},
+                {regex: /[\s\t]+(offset|macro|db|du|dw)\b/i, token: 'tag'},     //prep
+                {regex: /,(offset|macro|db|du|dw)\b/i, token: 'tag'},     //prep
+
+                {regex: /[\s\t]+(ax|bx|cx|dx|si|di|bp|sp)\b/i, token: 'def'},         //REG 16
+                {regex: /[\s\t]+(al|bl|cl|dl|ah|bh|ch|dh)\b/i, token: 'def'},  //REG  8
+                {regex: /[\s\t]+(cs|ds|es|ss)\b/i, token: 'property'},                //REG SEG
+
+                {regex: /,(ax|bx|cx|dx|si|di|bp|sp)\b/i, token: 'def'},         //REG 16
+                {regex: /,(al|bl|cl|dl|ah|bh|ch|dh)\b/i, token: 'def'},  //REG  8
+                {regex: /,(cs|ds|es|ss)\b/i, token: 'property'},                //REG SEG
+
+                {regex: /[\s\t]*(ax|bx|cx|dx|si|di|bp|sp)\b/i, token: 'def', sol:true},         //REG 16
+                {regex: /[\s\t]*(al|bl|cl|dl|ah|bh|ch|dh)\b/i, token: 'def', sol:true},  //REG  8
+                {regex: /[\s\t]*(cs|ds|es|ss)\b/i, token: 'property', sol:true},                //REG SEG
+                
+                {regex: /[-+\/*=<>![\]:]+/, token: "tag"},
+                {regex: /;.*/, token: "comment"},
+
+                {regex: /^(\s+|,|\b)(0x[0-9]+[0-9a-f]*h*|(0x)*[0-9]+[0-9a-f]*h|[0-9]+)\b/i, token: 'number'}   //NB
+            ],
+
+
+            meta: {
+                lineComment: ";"
+            }
+
+        });
+        
+        let val = '<%=element.submission%>'.replace(/#\*#/g,"\n") //document.getElementById('val').value;
+
+      var codeMirror = CodeMirror(document.getElementById('textArea'), {
+          value: val,
+          mode: 'asm86',
+          theme: 'monokai',
+          smartIndent: false,
+          lineNumbers: true,
+          indentWithTabs: true,
+
+          readOnly: true
+      });
+      
+      
+     </script>
+
+</html>

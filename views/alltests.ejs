@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" lang="en">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/alltests.css" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,800;1,100;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+<body>
+
+	<div class="tests-table">
+		<table>
+			<thead>
+				<tr class="table-head row" >
+
+					<th> Test ID </th>
+					<th> Test Duration</th>
+					<th> Number</th>
+					<th> Date</th>
+
+				</tr>
+				<% for(let [testid,startTime ,time] of alltests.entries() || []){  %>
+			
+					
+					<tr class="row switch-background">
+						<% let link ="/dashboard/alltests/"+startTime.testid
+						var d = startTime.startTime;
+						var dformat = [d.getMonth()+1,
+								d.getDate(),
+								d.getFullYear()].join('/')+' '+
+								[d.getHours(),
+								d.getMinutes(),
+								d.getSeconds()].join(':'); 
+									%>
+						<th> <p class="tobe-shifted-little text-center"><a href= "<%=link %>"  style="font-weight: 600;">Test  <%=startTime.testid  %> </a></p> </th>
+						<th> <p class="tobe-shifted text-center"><%=startTime.time %> </p></th>
+						<th> <p class="tobe-shifted text-center"><%=startTime.testStudents.length %> </p></th>
+						<th > <p class="tobe-shifted text-center"> <%=dformat  %> </p></th>
+					</tr>
+					
+					<% } %>
+			</thead>
+		</table>
+	</div>	
+
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/alltests.js"></script>
+</body>	
+
+
+</html>
